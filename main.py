@@ -55,8 +55,12 @@ if __name__ == "__main__":
         weights = np.ones(len(train_ds))
         clf_weights = np.ones(args.num_classifiers).tolist()
         clf = []
+        tot_num = len(train_ds)
+        num = int(tot_num*args.data_prob)
+        tmp_weights = np.ones(num)
         for idx in range(args.num_classifiers):
-            tree = run_decision_tree(train_ds, test_ds, weights, args)
+            ds = random.choices(train_ds, weights=weights, k=num)
+            tree = run_decision_tree(ds, test_ds, tmp_weights, args)
             clf.append(tree)
             eps = 0
             total = weights.sum()
