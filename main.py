@@ -49,7 +49,7 @@ if __name__ == "__main__":
             for i in range(args.num_classifiers):
                 vote.append(clf[i].predict(x))
             corr += stats.mode(vote)[0][0] == x['label']
-        
+        print
         print('bagging res:', corr / len(test_ds))
     elif args.boosting:
         weights = np.ones(len(train_ds))
@@ -72,7 +72,7 @@ if __name__ == "__main__":
             alpha = 0.5 * np.log((1 - eps) / eps)
             clf_weights[idx] = alpha
             weights = weights*np.exp(alpha*incorrect)
-        
+            print(alpha)
         corr = 0
         for x in tqdm(test_ds):
             pred = 0

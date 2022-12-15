@@ -19,7 +19,10 @@ class Node:
         if len(cnt) == 1:
             self.label = cnt.index[0]
         elif len(data.columns) == len(used_feature):
-            if cnt[True] > cnt[False]:
+            cnt = data['label']
+            pos = weights[cnt == 1].sum()
+            neg = weights[cnt == 0].sum()
+            if pos > neg:
                 self.label = True
             else:
                 self.label = False
