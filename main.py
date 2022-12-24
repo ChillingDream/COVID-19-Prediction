@@ -112,7 +112,7 @@ if __name__ == "__main__":
             clf.append(tree)
         feat[:, -1] = np.array(train_ds)[:, -1]
 
-        weights = SVM.train(feat, args.epochs, args.btz, args.lr, args.wd)
+        weights = SVM.train(feat, args.epochs, args.btz, args.lr, args.wd, True)
 
         tot_num = len(test_ds)
         feat = np.zeros([tot_num, 1+args.num_classifiers])
